@@ -8,7 +8,7 @@ while True:
     print("3 - Mostrar")
     print("0 - Sair")
 
-    op = input("Escolha: ")
+    op = input("\nEscolha: ")
 
     if op == "+":
         c.incrementar()
