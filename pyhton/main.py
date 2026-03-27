@@ -5,7 +5,7 @@ c = Contador()
 while True:
     print("\n1 - Somar")
     print("2 - Subtrair")
-    print("3 - Mostrar")
+    print("3 - Mostrar valor atual")
     print("0 - Sair")
 
     op = input("Escolha: ")
