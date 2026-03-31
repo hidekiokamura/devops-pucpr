@@ -3,20 +3,20 @@ from contador import Contador
 c = Contador()
 
 while True:
-    print("\n1 - Somar")
-    print("2 - Subtrair")
-    print("3 - Mostrar valor atual")
+    print("\n+ - Somar")
+    print("- - Subtrair")
+    print("3 - Mostrar")
     print("0 - Sair")
 
     op = input("\nEscolha: ")
 
-    if op == "1":
+    if op == "+":
         c.incrementar()
-    elif op == "2":
+    elif op == "-":
         c.decrementar()
     elif op == "3":
         print("Valor:", c.mostrar())
     elif op == "0":
         break
     else:
-        print("Opção inválida")
+        print("0Opção inválida")
