@@ -1,0 +1,22 @@
+name: Notificacoes Discord
+
+on:
+  push:
+    branches:
+      - main # O alerta roda sempre que houver um push direto ou merge concluído na main
+
+jobs:
+  discord-alert:
+    runs-on: ubuntu-latest
+    steps:
+      # Passo 1: Baixar o código (algumas actions de Discord exigem isso para ler o commit)
+      - name: Checkout do codigo
+        uses: actions/checkout@v4
+
+      # Passo 2: Enviar a mensagem usando a action mencionada no vídeo
+      - name: Enviar notificação de commit
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: info
+          details: '🚨 Um novo commit/merge foi realizado no repositório!'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
