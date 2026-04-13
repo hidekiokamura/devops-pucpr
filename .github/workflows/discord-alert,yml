@@ -3,7 +3,7 @@ name: Alertas do Discord
 on:
   push:
     branches:
-      - main # O alerta será enviado a cada commit ou merge na branch main
+      - main
 
 jobs:
   enviar_alerta:
@@ -11,6 +11,13 @@ jobs:
     steps:
       - name: Disparar mensagem via Webhook
         run: |
-          curl -H "Content-Type: application/json" \
-          -d '{"username": "GitHub Actions", "content": "🚨 Um novo commit ou merge acabou de ser feito na branch **main**! O projeto foi atualizado."}' \
-          ${{ secrets.DISCORD_WEBHOOK_URL }}
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -H "Content-Type: application/json" \
+          -d '{"content": "🚀 **Atividade Concluída!** O GitHub Actions enviou este alerta com sucesso para o canal."}' \
+          ${{ secrets.DISCORD_WEBHOOK_URL }})
+          
+          if [ "$RESPONSE" -eq 204 ] || [ "$RESPONSE" -eq 200 ]; then
+            echo "Mensagem enviada com sucesso!"
+          else
+            echo "Erro ao enviar: Código HTTP $RESPONSE"
+            exit 1
+          fi
