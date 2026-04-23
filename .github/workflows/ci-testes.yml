@@ -1,0 +1,28 @@
+name: Testes Unitarios CI
+
+on:
+  pull_request:
+    branches:
+      - main # O Action vai rodar toda vez que você abrir um PR para a branch main
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Instalar dependências e Pytest
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-asyncio fastapi
+          # Se você tiver um requirements.txt, descomente a linha abaixo:
+          # pip install -r requirements.txt
+
+      - name: Rodar os 5 Testes Unitários
+        run: pytest pyhton/tests/ -v
